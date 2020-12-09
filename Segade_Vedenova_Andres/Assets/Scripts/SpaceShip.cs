@@ -21,6 +21,10 @@ public class SpaceShip : MonoBehaviour
     bool offLimits = false;
     //Variable para tener el número de enemigos en escena.
     int enemyNumber;
+    //Variable para acceder al mesh render de la nave.
+    [SerializeField] MeshRenderer myMeshRender;
+    //Variable para saber si la nave está viva.
+    bool alive = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,10 @@ public class SpaceShip : MonoBehaviour
     void Update()
     {
         //Método para mover la nave.
-        moveSpaceship();
+        if(alive == true)
+        {
+            moveSpaceship();
+        }
         //Especificamos el texto de alert.
         alert.text = "ALERT";
         //Le decimos que se active el texto si la booleana lo indica.
@@ -86,6 +93,14 @@ public class SpaceShip : MonoBehaviour
         {
             offLimits = false;
         }
+        if(Input.GetKey(KeyCode.JoystickButton4))
+        {
+            transform.Translate(Vector3.up * Time.deltaTime * speed);
+        }
+        if(Input.GetKey(KeyCode.JoystickButton5))
+        {
+            transform.Translate(Vector3.down * Time.deltaTime * speed);
+        }
     }
     //Corrutina para añadir uno al contador de tiempo cada segundo.
     IEnumerator secondsSpent()
@@ -98,6 +113,15 @@ public class SpaceShip : MonoBehaviour
             //Hacemos que la corrutina tarde 1 segundo en añadir 1 al contador.
             yield return new WaitForSeconds(1f);
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            print("GAME OVER");
+            myMeshRender.enabled = false;
+            alive = false;
+        }
     }
 }
