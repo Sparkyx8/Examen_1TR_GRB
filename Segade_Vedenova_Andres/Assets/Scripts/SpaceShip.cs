@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour
 {
     float speed = 10f;
+    float rotSpeed = 100f;
     bool forward = true;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class SpaceShip : MonoBehaviour
         float desplX = Input.GetAxis("Horizontal");
         float myPosZ = transform.position.z;
         float desplY = Input.GetAxis("Vertical");
+        float rotY = Input.GetAxis("Rotate");
+        float rotYMouse = Input.GetAxis("Rotate Mouse");
+        float rotDegrees = rotY * Time.deltaTime * rotSpeed;
+        float rotDegreesMouse = rotYMouse * Time.deltaTime * speed;
         if (forward == true)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed * desplY);
@@ -36,9 +41,8 @@ public class SpaceShip : MonoBehaviour
         {
             forward = true;
         }
-        print(forward);
-        print(desplY);
         transform.Translate(Vector3.right * Time.deltaTime * speed * desplX);
-        
+        transform.Rotate(0f, rotDegrees, 0f);
+        transform.Rotate(0f, rotDegreesMouse, 0f);
     }
 }
