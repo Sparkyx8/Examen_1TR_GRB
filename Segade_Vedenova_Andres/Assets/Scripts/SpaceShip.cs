@@ -78,7 +78,7 @@ public class SpaceShip : MonoBehaviour
         transform.Rotate(0f, rotDegrees, 0f);
         transform.Rotate(0f, rotDegreesMouse, 0f);
         //Condición para saber si la nave está dentro del tablero o no.
-        if (myPosX > 25 || myPosX < -25 || myPosZ > 25 || myPosZ < -25 || myPosY > 25)
+        if (myPosX > 22 || myPosX < -22 || myPosZ > 22 || myPosZ < -22 || myPosY > 22)
         {
             offLimits = true;
         }
