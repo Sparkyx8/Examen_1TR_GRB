@@ -39,7 +39,7 @@ public class SpaceShip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Método para mover la nave.
+        //Método para mover la nave con la condición de que esté viva.
         if(alive == true)
         {
             moveSpaceship();
@@ -93,6 +93,7 @@ public class SpaceShip : MonoBehaviour
         {
             offLimits = false;
         }
+        //Movimiento Vertical de la nave.
         if(Input.GetKey(KeyCode.JoystickButton4))
         {
             transform.Translate(Vector3.up * Time.deltaTime * speed);
@@ -114,12 +115,13 @@ public class SpaceShip : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-
+    //Colisión de la nave con el suelo.
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Obstacle")
         {
             print("GAME OVER");
+            //Desactivamos el render y cambiamos la booleana de vivo a false para que se pare la nave.
             myMeshRender.enabled = false;
             alive = false;
         }

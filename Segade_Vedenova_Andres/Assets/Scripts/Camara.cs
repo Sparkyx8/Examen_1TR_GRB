@@ -6,10 +6,12 @@ public class Camara : MonoBehaviour
 {
     //Variable para acceder a la posición de la nave.
     public Transform spaceShip;
+    //Variable para el sonido de fondo.
+    private AudioSource backgroundSound;
     // Start is called before the first frame update
     void Start()
     {
-        
+        backgroundSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
